@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
+}
+
+dependencies {
+    compileOnly 'androidx.annotation:annotation:1.2.0'
+    compileOnly 'androidx.lifecycle:lifecycle-livedata-core:2.3.1'
+    compileOnly 'androidx.lifecycle:lifecycle-common:2.3.1'
+    compileOnly 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
+    compileOnly 'androidx.lifecycle:lifecycle-runtime:2.3.1'
+    compileOnly 'androidx.collection:collection:1.1.0'
+}
+
+apply plugin: 'maven'
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "file:///C:/Users/Administrator/.m2/repository")
+        pom.project{
+            groupId = "energy"
+            artifactId = "core"
+            packaging = "aar"
+            version = "0.0.1"
+        }
+    }
+    // type显示指定任务类型或任务, 这里指定要执行Javadoc这个task,这个task在gradle中已经定义
+    task androidJavadocs(type: Javadoc) {
+        // 设置源码所在的位置
+        source = android.sourceSets.main.java.sourceFiles
+    }
+    // 生成javadoc.jar
+    task androidJavadocsJar(type: Jar) {
+        // 指定文档名称
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
+    task androidSourcesJar(type: Jar) {
+        // 指定文档名称
+        classifier = 'source'
+        from android.sourceSets.main.java.sourceFiles
+    }
+    artifacts {
+        archives androidSourcesJar
+        archives androidJavadocsJar
+    }
+}
