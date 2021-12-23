@@ -66,13 +66,13 @@ allprojects {
 
 ```groovy
 // 协程库(版本自定)
-    implementation 'com.github.cjfsss:EnergyCore:0.0.1'
-    implementation 'androidx.annotation:annotation:1.2.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata-core:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-common:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
-    implementation 'androidx.lifecycle:lifecycle-runtime:2.3.1'
-    implementation 'androidx.collection:collection:1.1.0'
+implementation 'com.github.cjfsss:EnergyCore:0.0.1'
+implementation 'androidx.annotation:annotation:1.2.0'
+implementation 'androidx.lifecycle:lifecycle-livedata-core:2.3.1'
+implementation 'androidx.lifecycle:lifecycle-common:2.3.1'
+implementation 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
+implementation 'androidx.lifecycle:lifecycle-runtime:2.3.1'
+implementation 'androidx.collection:collection:1.1.0'
 ```
 
 <br>
