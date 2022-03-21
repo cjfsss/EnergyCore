@@ -3,9 +3,10 @@ package hos.core.singleton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.arch.core.util.Function;
 
 import java.util.WeakHashMap;
+
+import hos.core.interfaces.Function1;
 
 
 /**
@@ -54,7 +55,7 @@ public final class SingletonWeakManager implements ISingletonManager {
     @Override
     @NonNull
     public <P extends ISingletonWrapper> P getInstance(@NonNull final Class<P> key,
-                                                       @NonNull final Function<Class<P>, P> function) {
+                                                       @NonNull final Function1<Class<P>, P> function) {
         P singleton = getInstance(key);
         if (singleton != null) {
             return singleton;

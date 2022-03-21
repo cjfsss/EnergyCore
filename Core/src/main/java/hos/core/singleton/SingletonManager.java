@@ -3,10 +3,11 @@ package hos.core.singleton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.arch.core.util.Function;
-import androidx.collection.ArrayMap;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import hos.core.interfaces.Function1;
 
 
 /**
@@ -55,7 +56,7 @@ public class SingletonManager implements ISingletonManager {
     @Override
     @NonNull
     public <P extends ISingletonWrapper> P getInstance(@NonNull final Class<P> key,
-                                                       @NonNull final Function<Class<P>, P> function) {
+                                                       @NonNull final Function1<Class<P>, P> function) {
         P singleton = getInstance(key);
         if (singleton != null) {
             return singleton;
@@ -75,7 +76,7 @@ public class SingletonManager implements ISingletonManager {
     }
 
     protected Map<Class<?>, ISingletonWrapper> newSingletonMap() {
-        return mMap = new ArrayMap<>();
+        return mMap = new HashMap<>();
     }
 
     private <P extends ISingletonWrapper> void register(@NonNull Class<P> key,

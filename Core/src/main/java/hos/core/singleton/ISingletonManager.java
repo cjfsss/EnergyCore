@@ -2,7 +2,8 @@ package hos.core.singleton;
 
 
 import androidx.annotation.NonNull;
-import androidx.arch.core.util.Function;
+
+import hos.core.interfaces.Function1;
 
 /**
  * <p>Title: ISingletonManager </p>
@@ -20,6 +21,6 @@ public interface ISingletonManager {
      */
     @NonNull
     <P extends ISingletonWrapper> P getInstance(@NonNull final Class<P> key,
-                                                @NonNull final Function<Class<P>, P> function);
+                                                @NonNull final Function1<Class<P>, P> function);
 
 }
