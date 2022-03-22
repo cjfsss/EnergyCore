@@ -18,22 +18,22 @@ import androidx.annotation.Nullable;
  * @version : 1.0
  * @date : 2022/3/15 23:38
  */
-public class Hos {
+public class AppCompat {
 
-    private static Hos hos;
+    private static AppCompat hos;
 
     @Nullable
     private Boolean mIsAppDebug = null;
 
 
-    private Hos() {
+    private AppCompat() {
     }
 
-    public static Hos getHos() {
+    public static AppCompat getInstance() {
         if (hos != null) {
             return hos;
         }
-        return hos = new Hos();
+        return hos = new AppCompat();
     }
 
     @NonNull
@@ -43,7 +43,7 @@ public class Hos {
 
     @NonNull
     public static <T extends Application> T getApplication() {
-        return (T) getHos().getApplicationInner();
+        return (T) getInstance().getApplicationInner();
     }
 
     private Application application;

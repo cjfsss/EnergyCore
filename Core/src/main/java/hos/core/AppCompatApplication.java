@@ -16,12 +16,12 @@ import androidx.annotation.Nullable;
  * @version : 1.0
  * @date : 2021/4/19 23:16
  */
-public class AppCompatApplication extends Application implements ActivityManager.FrontBackCallback {
+public abstract class AppCompatApplication extends Application implements ActivityManager.FrontBackCallback {
 
     @SuppressWarnings("unchecked")
     @NonNull
     public static <T extends AppCompatApplication> T getAppCompatApplication() {
-        return (T) Hos.getApplication();
+        return (T) AppCompat.getApplication();
     }
 //
 //    // 全局数据
@@ -42,8 +42,8 @@ public class AppCompatApplication extends Application implements ActivityManager
         init(this);
     }
 
-    protected void init(Application application){
-        Hos.getHos().init(application);
+    protected void init(@NonNull Application application){
+        AppCompat.getInstance().init(application);
         ActivityManager.getInstance().init(application);
         ActivityManager.getInstance().addFrontBackCallback(this);
     }
@@ -68,7 +68,7 @@ public class AppCompatApplication extends Application implements ActivityManager
      * @return true 是debug 模式
      */
     public boolean isAppDebug() {
-        return Hos.getHos().isAppDebug();
+        return AppCompat.getInstance().isAppDebug();
     }
 
     /**
@@ -76,18 +76,14 @@ public class AppCompatApplication extends Application implements ActivityManager
      *
      * @param activity 上下文
      */
-    protected void onForeground(@NonNull Activity activity) {
-
-    }
+    protected abstract void onForeground(@NonNull Activity activity);
 
     /**
      * 回到后台
      *
      * @param activity 上下文
      */
-    protected void onBackground(@NonNull Activity activity) {
-
-    }
+    protected abstract void onBackground(@NonNull Activity activity);
 
     @Override
     public void onChanged(Activity activity, boolean front) {
