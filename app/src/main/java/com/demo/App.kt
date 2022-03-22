@@ -10,7 +10,7 @@ import hos.core.AppCompat
  * <p>Company: www.mapuni.com </p>
  *
  * @author : 蔡俊峰
- * @date : 2022/3/22 16:16
+ * @date : 2022/3/22 21:16
  * @version : 1.0
  */
 class App : Application() {
