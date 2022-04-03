@@ -43,7 +43,7 @@ public abstract class AppCompatApplication extends Application implements Activi
     }
 
     protected void init(@NonNull Application application){
-        AppCompat.getInstance().init(application);
+        AppCompat.init(application);
         ActivityManager.getInstance().init(application);
         ActivityManager.getInstance().addFrontBackCallback(this);
     }

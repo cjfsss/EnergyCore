@@ -41,6 +41,10 @@ public class AppCompat {
         return getApplication();
     }
 
+    public static void init(Application application) {
+        getInstance().initApp(application);
+    }
+
     @NonNull
     public static <T extends Application> T getApplication() {
         return (T) getInstance().getApplicationInner();
@@ -48,8 +52,7 @@ public class AppCompat {
 
     private Application application;
 
-
-    public void init(Application application) {
+    private void initApp(Application application) {
         this.application = application;
     }
 

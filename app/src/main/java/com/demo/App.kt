@@ -17,8 +17,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppCompat.getInstance().init(this)
-        ActivityManager.getInstance().init(this)
+        AppCompat.init(this)
+        ActivityManager.init(this)
         ActivityManager.getInstance().addFrontBackCallback { activity, front ->
 
         }

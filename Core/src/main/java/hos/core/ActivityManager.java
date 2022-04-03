@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import java.util.List;
  * @version : 1.0
  * @date : 2022/3/20 19:12
  */
+@RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class ActivityManager {
     private static ActivityManager activityManager;
 
@@ -40,7 +42,11 @@ public class ActivityManager {
         return activityManager = new ActivityManager();
     }
 
-    public void init(@NonNull Application application) {
+    public static void init(@NonNull Application application) {
+        getInstance().initApp(application);
+    }
+
+    private void initApp(@NonNull Application application) {
         application.registerActivityLifecycleCallbacks(new InnerActivityLifecycleCallbacks());
     }
 
@@ -104,6 +110,7 @@ public class ActivityManager {
         frontBackCallbacks.remove(callback);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private class InnerActivityLifecycleCallbacks implements
             Application.ActivityLifecycleCallbacks {
 
