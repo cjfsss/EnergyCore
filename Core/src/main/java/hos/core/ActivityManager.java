@@ -5,9 +5,6 @@ import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -23,7 +20,6 @@ import java.util.List;
  * @version : 1.0
  * @date : 2022/3/20 19:12
  */
-@RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class ActivityManager {
     private static ActivityManager activityManager;
 
@@ -42,11 +38,11 @@ public class ActivityManager {
         return activityManager = new ActivityManager();
     }
 
-    public static void init(@NonNull Application application) {
+    public static void init( Application application) {
         getInstance().initApp(application);
     }
 
-    private void initApp(@NonNull Application application) {
+    private void initApp( Application application) {
         application.registerActivityLifecycleCallbacks(new InnerActivityLifecycleCallbacks());
     }
 
@@ -68,7 +64,7 @@ public class ActivityManager {
     /**
      * 找出栈顶不为空，且没有被销毁的activity
      */
-    @Nullable
+
     public Activity getTopActivity() {
         return getTopActivity(true);
     }
@@ -76,7 +72,7 @@ public class ActivityManager {
     /**
      * 找出栈顶不为空，且没有被销毁的activity
      */
-    @Nullable
+
     public Activity getTopActivity(boolean onlyAlive) {
         if (activityRefs.size() <= 0) {
             return null;
@@ -110,17 +106,16 @@ public class ActivityManager {
         frontBackCallbacks.remove(callback);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private class InnerActivityLifecycleCallbacks implements
             Application.ActivityLifecycleCallbacks {
 
         @Override
-        public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
+        public void onActivityCreated( Activity activity,  Bundle bundle) {
             activityRefs.add(new WeakReference<Activity>(activity));
         }
 
         @Override
-        public void onActivityStarted(@NonNull Activity activity) {
+        public void onActivityStarted( Activity activity) {
             activityStartCount++;
             //activityStartCount>0  说明应用处在可见状态，也就是前台
             //!front 之前是不是在后台
@@ -131,17 +126,17 @@ public class ActivityManager {
         }
 
         @Override
-        public void onActivityResumed(@NonNull Activity activity) {
+        public void onActivityResumed( Activity activity) {
 
         }
 
         @Override
-        public void onActivityPaused(@NonNull Activity activity) {
+        public void onActivityPaused( Activity activity) {
 
         }
 
         @Override
-        public void onActivityStopped(@NonNull Activity activity) {
+        public void onActivityStopped( Activity activity) {
             activityStartCount--;
             if (activityStartCount <= 0 && front) {
                 front = false;
@@ -150,12 +145,12 @@ public class ActivityManager {
         }
 
         @Override
-        public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
+        public void onActivitySaveInstanceState( Activity activity,  Bundle bundle) {
 
         }
 
         @Override
-        public void onActivityDestroyed(@NonNull Activity activity) {
+        public void onActivityDestroyed( Activity activity) {
             for (WeakReference<Activity> reference : activityRefs) {
                 if (reference != null && reference.get() == activity) {
                     activityRefs.remove(reference);

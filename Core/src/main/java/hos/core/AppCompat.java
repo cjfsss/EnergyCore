@@ -6,9 +6,6 @@ import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.text.TextUtils;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 /**
  * <p>Title: Hos </p>
  * <p>Description:  </p>
@@ -22,7 +19,7 @@ public class AppCompat {
 
     private static AppCompat hos;
 
-    @Nullable
+
     private Boolean mIsAppDebug = null;
 
 
@@ -36,7 +33,7 @@ public class AppCompat {
         return hos = new AppCompat();
     }
 
-    @NonNull
+
     public static Application getApp() {
         return getApplication();
     }
@@ -45,7 +42,7 @@ public class AppCompat {
         getInstance().initApp(application);
     }
 
-    @NonNull
+
     public static <T extends Application> T getApplication() {
         return (T) getInstance().getApplicationInner();
     }
@@ -56,7 +53,7 @@ public class AppCompat {
         this.application = application;
     }
 
-    @NonNull
+
     private Application getApplicationInner() {
         if (application == null) {
             try {
@@ -84,7 +81,7 @@ public class AppCompat {
         return mIsAppDebug = (ai != null && (ai.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0);
     }
 
-    @NonNull
+
     public Context getContext() {
         Activity topActivity = ActivityManager.getInstance().getTopActivity(true);
         if (topActivity != null) {

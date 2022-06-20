@@ -3,10 +3,6 @@ package hos.core;
 import android.app.Activity;
 import android.app.Application;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-
 /**
  * <p>Title: AppCompatApplication </p>
  * <p>Description:  </p>
@@ -19,16 +15,16 @@ import androidx.annotation.Nullable;
 public abstract class AppCompatApplication extends Application implements ActivityManager.FrontBackCallback {
 
     @SuppressWarnings("unchecked")
-    @NonNull
+
     public static <T extends AppCompatApplication> T getAppCompatApplication() {
         return (T) AppCompat.getApplication();
     }
 //
 //    // 全局数据
-//    @Nullable
+//
 //    private MutableLiveData<Bundle> msg = null;
 //
-//    @NonNull
+//
 //    public MutableLiveData<Bundle> getMsg() {
 //        if (msg != null) {
 //            return msg;
@@ -42,13 +38,13 @@ public abstract class AppCompatApplication extends Application implements Activi
         init(this);
     }
 
-    protected void init(@NonNull Application application){
+    protected void init( Application application){
         AppCompat.init(application);
-        ActivityManager.getInstance().init(application);
+        ActivityManager.init(application);
         ActivityManager.getInstance().addFrontBackCallback(this);
     }
 
-    @Nullable
+
     public Activity getCurrentActivity() {
         return ActivityManager.getInstance().getTopActivity();
     }
@@ -76,14 +72,14 @@ public abstract class AppCompatApplication extends Application implements Activi
      *
      * @param activity 上下文
      */
-    protected abstract void onForeground(@NonNull Activity activity);
+    protected abstract void onForeground( Activity activity);
 
     /**
      * 回到后台
      *
      * @param activity 上下文
      */
-    protected abstract void onBackground(@NonNull Activity activity);
+    protected abstract void onBackground( Activity activity);
 
     @Override
     public void onChanged(Activity activity, boolean front) {
