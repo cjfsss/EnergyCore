@@ -1,8 +1,12 @@
 package com.demo
 
 import android.app.Application
+import com.blankj.utilcode.util.FileUtils
+import com.blankj.utilcode.util.UriUtils
+import com.blankj.utilcode.util.Utils
 import hos.core.ActivityManager
 import hos.core.AppCompat
+import hos.core.UriFileConvert
 
 /**
  * <p>Title: App </p>
@@ -17,7 +21,10 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        AppCompat.init(this)
+        Utils.init(this)
+        AppCompat.init(this, UriFileConvert { context, file ->
+            UriUtils.file2Uri(FileUtils.getFileByPath(file))
+        })
         ActivityManager.getInstance().addFrontBackCallback { activity, front ->
 
         }
