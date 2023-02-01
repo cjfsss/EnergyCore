@@ -14,6 +14,6 @@ import android.net.Uri;
  */
 public interface UriFileConvert {
 
-    Uri getUriForFile(Context context, String file);
+    Uri convertUri(Context context, String file);
 
 }
