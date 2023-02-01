@@ -3,16 +3,15 @@
 
 
 
-* ##### Application 必须继承AppCompatApplication  相关 -> [AppCompatApplication.java]
-```kotlin
-class CommonApp : AppCompatApplication() {
-    
-}
 ```
-或者调用
+必须调用
 ```java
-    AppCompat.getInstance().init(application);
-    ActivityManager.getInstance().init(application);
+    AppCompat.init(this, new UriFileConvert() {
+            @Override
+            public Uri convertUri(Context context, String file) {
+                return UriUtils.file2Uri(FileUtils.getFileByPath(file));
+            }
+        });
     ActivityManager.getInstance().addFrontBackCallback(this);
 ```
 <br>
