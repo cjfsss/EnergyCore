@@ -19,9 +19,7 @@ public class AppCompat {
 
     private static AppCompat hos;
 
-
     private Boolean mIsAppDebug = null;
-
 
     private AppCompat() {
     }
@@ -33,13 +31,12 @@ public class AppCompat {
         return hos = new AppCompat();
     }
 
-
     public static Application getApp() {
         return getApplication();
     }
 
-    public static void init(Application application) {
-        getInstance().initApp(application);
+    public static void init(Application application, UriFileConvert convert) {
+        getInstance().initApp(application, convert);
         ActivityManager.init(application);
     }
 
@@ -77,10 +74,22 @@ public class AppCompat {
         return ActivityManager.getInstance().isBackground();
     }
 
+    /**
+     * 是否在后台
+     *
+     * @return true 在后台
+     */
+    public static UriFileConvert getUriFileConvert() {
+        return getInstance().uriFileConvert;
+    }
+
     private Application application;
 
-    protected void initApp(Application application) {
+    private UriFileConvert uriFileConvert;
+
+    protected void initApp(Application application, UriFileConvert convert) {
         this.application = application;
+        uriFileConvert = convert;
     }
 
     private Application getApplicationInner() {
