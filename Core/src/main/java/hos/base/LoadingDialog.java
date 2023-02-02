@@ -7,7 +7,7 @@ import hos.base.view.IViewLoading;
 
 /**
  * <p>Title: LoadingDialog </p>
- * <p>Description:  </p>
+ * <p>Description: 对话框 </p>
  * <p>Company: www.mapuni.com </p>
  *
  * @author : 蔡俊峰
@@ -35,6 +35,7 @@ public class LoadingDialog implements IViewLoading {
             return;
         }
         mProgressDialog.setTitle(title);
+        mProgressDialog.setCanceledOnTouchOutside(isDismissOnTouchOutside);
         mProgressDialog.setCancelable(isDismissOnBackPressed);
         if (!mProgressDialog.isShowing()) {
             mProgressDialog.show();

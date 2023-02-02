@@ -30,8 +30,7 @@ allprojects {
 在 module 的 build.gradle 添加依赖
 
 ```groovy
-implementation 'com.github.cjfsss:EnergyCore:0.0.3'
-implementation 'androidx.annotation:annotation:1.3.0'
+implementation 'com.github.cjfsss:EnergyCore:0.0.9'
 ```
 
 <br>
