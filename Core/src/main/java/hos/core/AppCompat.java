@@ -40,6 +40,7 @@ public class AppCompat {
         ActivityManager.init(application);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T extends Application> T getApplication() {
         return (T) getInstance().getApplicationInner();
     }

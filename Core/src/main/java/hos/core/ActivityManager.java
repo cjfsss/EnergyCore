@@ -5,11 +5,12 @@ import android.app.Application;
 import android.os.Build;
 import android.os.Bundle;
 
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
+import hos.utils.CoreLog;
 
 /**
  * <p>Title: ActivityManager </p>
@@ -38,15 +39,16 @@ public class ActivityManager {
         return activityManager = new ActivityManager();
     }
 
-    public static void init( Application application) {
+    public static void init(Application application) {
         getInstance().initApp(application);
     }
 
-    private void initApp( Application application) {
+    private void initApp(Application application) {
         application.registerActivityLifecycleCallbacks(new InnerActivityLifecycleCallbacks());
     }
 
     private void onFrontBackChanged(Activity activity, boolean front) {
+        CoreLog.d("onFrontBackChanged front:" + front);
         for (FrontBackCallback callback : frontBackCallbacks) {
             callback.onChanged(activity, front);
         }
@@ -110,12 +112,18 @@ public class ActivityManager {
             Application.ActivityLifecycleCallbacks {
 
         @Override
-        public void onActivityCreated( Activity activity,  Bundle bundle) {
+        public void onActivityCreated(Activity activity, Bundle bundle) {
+            if (bundle != null) {
+                CoreLog.d("onActivityCreated bundle:" + bundle.toString());
+            } else {
+                CoreLog.d("onActivityCreated");
+            }
             activityRefs.add(new WeakReference<Activity>(activity));
         }
 
         @Override
-        public void onActivityStarted( Activity activity) {
+        public void onActivityStarted(Activity activity) {
+            CoreLog.d("onActivityStarted");
             activityStartCount++;
             //activityStartCount>0  说明应用处在可见状态，也就是前台
             //!front 之前是不是在后台
@@ -126,17 +134,18 @@ public class ActivityManager {
         }
 
         @Override
-        public void onActivityResumed( Activity activity) {
-
+        public void onActivityResumed(Activity activity) {
+            CoreLog.d("onActivityResumed");
         }
 
         @Override
-        public void onActivityPaused( Activity activity) {
-
+        public void onActivityPaused(Activity activity) {
+            CoreLog.d("onActivityPaused");
         }
 
         @Override
-        public void onActivityStopped( Activity activity) {
+        public void onActivityStopped(Activity activity) {
+            CoreLog.d("onActivityStopped");
             activityStartCount--;
             if (activityStartCount <= 0 && front) {
                 front = false;
@@ -145,12 +154,17 @@ public class ActivityManager {
         }
 
         @Override
-        public void onActivitySaveInstanceState( Activity activity,  Bundle bundle) {
-
+        public void onActivitySaveInstanceState(Activity activity, Bundle bundle) {
+            if (bundle != null) {
+                CoreLog.d("onActivitySaveInstanceState bundle:" + bundle.toString());
+            } else {
+                CoreLog.d("onActivitySaveInstanceState");
+            }
         }
 
         @Override
-        public void onActivityDestroyed( Activity activity) {
+        public void onActivityDestroyed(Activity activity) {
+            CoreLog.d("onActivityDestroyed");
             for (WeakReference<Activity> reference : activityRefs) {
                 if (reference != null && reference.get() == activity) {
                     activityRefs.remove(reference);
